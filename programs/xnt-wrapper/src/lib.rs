@@ -8,13 +8,12 @@ pub mod xnt_wrapper {
     use super::*;
 
     /// Initialize the wXNT mint (one-time setup)
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+    pub fn initialize(_ctx: Context<Initialize>) -> Result<()> {
         msg!("wXNT wrapper initialized");
         Ok(())
     }
 
     /// Wrap native XNT into wXNT tokens
-    /// User sends native XNT, receives wXNT 1:1
     pub fn wrap(ctx: Context<Wrap>, amount: u64) -> Result<()> {
         require!(amount > 0, ErrorCode::InvalidAmount);
 
@@ -35,7 +34,7 @@ pub mod xnt_wrapper {
 
         // Mint wXNT tokens to user's token account
         let seeds = &[
-            b"wrapper-authority",
+            b"wrapper-authority".as_ref(),
             &[ctx.bumps.wrapper_authority],
         ];
         let signer = &[&seeds[..]];
@@ -56,7 +55,6 @@ pub mod xnt_wrapper {
     }
 
     /// Unwrap wXNT tokens back to native XNT
-    /// User burns wXNT, receives native XNT 1:1
     pub fn unwrap(ctx: Context<Unwrap>, amount: u64) -> Result<()> {
         require!(amount > 0, ErrorCode::InvalidAmount);
 
@@ -88,7 +86,6 @@ pub struct Initialize<'info> {
         payer = payer,
         mint::decimals = 9,
         mint::authority = wrapper_authority,
-        mint::freeze_authority = wrapper_authority,
     )]
     pub wxnt_mint: Account<'info, Mint>,
     
@@ -134,7 +131,6 @@ pub struct Wrap<'info> {
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
     pub associated_token_program: Program<'info, anchor_spl::associated_token::AssociatedToken>,
-    pub rent: Sysvar<'info, Rent>,
 }
 
 #[derive(Accounts)]
