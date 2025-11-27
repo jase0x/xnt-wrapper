@@ -2,8 +2,12 @@
 anchor_version = "0.32.1"
 
 [features]
-seeds = false
-skip-lint = false
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+init-if-needed = []
+default = ["init-if-needed"]
 
 [programs.localnet]
 xnt_wrapper = "2Q8A2o2NkAeze9i38XJqMwdKNkygg52xK9HaXkSc539a"
