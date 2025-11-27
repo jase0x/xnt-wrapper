@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Mint, Token, TokenAccount, MintTo, Burn};
+use anchor_spl::associated_token::AssociatedToken;
 
 declare_id!("2Q8A2o2NkAeze9i38XJqMwdKNkygg52xK9HaXkSc539a");
 
@@ -121,16 +122,13 @@ pub struct Wrap<'info> {
     pub user: Signer<'info>,
     
     #[account(
-        init_if_needed,
-        payer = user,
-        associated_token::mint = wxnt_mint,
-        associated_token::authority = user,
+        mut,
+        constraint = user_wxnt_account.owner == user.key(),
+        constraint = user_wxnt_account.mint == wxnt_mint.key()
     )]
     pub user_wxnt_account: Account<'info, TokenAccount>,
     
-    pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
-    pub associated_token_program: Program<'info, anchor_spl::associated_token::AssociatedToken>,
 }
 
 #[derive(Accounts)]
@@ -151,8 +149,8 @@ pub struct Unwrap<'info> {
     
     #[account(
         mut,
-        associated_token::mint = wxnt_mint,
-        associated_token::authority = user,
+        constraint = user_wxnt_account.owner == user.key(),
+        constraint = user_wxnt_account.mint == wxnt_mint.key()
     )]
     pub user_wxnt_account: Account<'info, TokenAccount>,
     
