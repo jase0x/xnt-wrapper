@@ -5,20 +5,20 @@ seeds = false
 skip-lint = false
 
 [programs.localnet]
-xnt_wrapper = "YourProgramIDHere111111111111111111111111111"
+xnt_wrapper = "2Q8A2o2NkAeze9i38XJqMwdKNkygg52xK9HaXkSc539a"
 
 [programs.devnet]
-xnt_wrapper = "YourProgramIDHere111111111111111111111111111"
+xnt_wrapper = "2Q8A2o2NkAeze9i38XJqMwdKNkygg52xK9HaXkSc539a"
 
 [programs.mainnet]
-xnt_wrapper = "YourProgramIDHere111111111111111111111111111"
+xnt_wrapper = "2Q8A2o2NkAeze9i38XJqMwdKNkygg52xK9HaXkSc539a"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
-wallet = "~/.config/solana/id.json"
+cluster = "https://rpc.mainnet.x1.xyz"
+wallet = "/home/xaddr/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
