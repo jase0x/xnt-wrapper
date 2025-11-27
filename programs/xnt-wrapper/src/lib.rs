@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Mint, Token, TokenAccount, MintTo, Burn};
 
-declare_id!("YourProgramIDHere111111111111111111111111111");
+declare_id!("2Q8A2o2NkAeze9i38XJqMwdKNkygg52xK9HaXkSc539a");
 
 #[program]
 pub mod xnt_wrapper {
