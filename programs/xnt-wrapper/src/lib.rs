@@ -1,6 +1,5 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Mint, Token, TokenAccount, MintTo, Burn};
-use anchor_spl::associated_token::AssociatedToken;
 
 declare_id!("2Q8A2o2NkAeze9i38XJqMwdKNkygg52xK9HaXkSc539a");
 
@@ -129,6 +128,7 @@ pub struct Wrap<'info> {
     pub user_wxnt_account: Account<'info, TokenAccount>,
     
     pub token_program: Program<'info, Token>,
+    pub system_program: Program<'info, System>,
 }
 
 #[derive(Accounts)]
